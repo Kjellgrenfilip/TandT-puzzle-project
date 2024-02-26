@@ -51,4 +51,9 @@ To use the Solver agent:
 
 Testing for the Tents and Trees Solver is done using the Python `unittest` framework. The `TestSolverFunctionality` class contains various test methods that assess the functionality of the Solver agent under different scenarios. Each test method sets up a Tents and Trees puzzle with specific parameters and constraints, runs the Solver agent, and then asserts whether the generated solution satisfies the puzzle constraints.
 
+Run the tests:
+´´´
+python tests.py
+´´´
+
 To add more tests, additional test methods can be defined within the `TestSolverFunctionality` class. These methods should follow the naming convention of starting with 'test_' to be automatically discovered and executed by the `unittest` framework. Each test method should create a new Tents and Trees puzzle with unique parameters and constraints, run the Solver agent, and assert the correctness of the generated solution.
