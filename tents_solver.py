@@ -10,7 +10,7 @@ class TentSolver:
         #using the Bool-function from Z3 to represent every variable in the grid. So far all we know is
         #that there can be a tent in every tile of the grid. Bool allows us to use Boolean logic when constructing constraints.
         # Results in a row*column 2d grid.
-        self.tent_variables = [[Bool("tent_on_tile_%d_%d" % (j, i)) for i in range(columns)] for j in range(rows)]
+        self.tent_variables = [[Bool("tent_on_tile_%d_%d" % (i, j)) for j in range(columns)] for i in range(rows)]
         self.solver = Solver()
 
     #The following function sets all constraints for the tent and tree puzzle. The contraints themselves are explained below.
@@ -21,12 +21,12 @@ class TentSolver:
         self._add_tent_adjacency_constraints()
         self._add_tree_adjacency_constraints()
         self._add_no_adjacent_tent_variables_constraints()
+        self._add_tree_tent_equality_constraints()
 
     #Constraint1: ensure the correct amount of tents on every i:th row.
     def _add_row_constraints(self):
         for i in range(self.rows):
             self.solver.add(Sum(self.tent_variables[i]) == self.row_tent_counts[i])
-            
     #Constraint2: ensure the correct amount of tents on every j:th column.
     def _add_column_constraints(self):
         for j in range(self.columns):
@@ -34,9 +34,13 @@ class TentSolver:
 
     #Constraint3: ensure no tent is places where there is already a tree.
     def _add_tree_constraints(self):
-        for row, col in self.tree_locations:
-            self.solver.add(Not(self.tent_variables[row][col]))
+        for i, j in self.tree_locations:
+            self.solver.add(Not(self.tent_variables[i][j]))
     
+    def _add_tree_tent_equality_constraints(self):
+        total_tents = sum(sum(i) for i in self.tent_variables)
+        self.solver.add(total_tents == len(self.tree_locations))
+        
     #Constraint4: ensure that every tent has atleast one adjacent tree (in horizontal and vertical direction)
     def _add_tent_adjacency_constraints(self):
         for i, j in self.tree_locations:

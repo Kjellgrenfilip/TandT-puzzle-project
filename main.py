@@ -37,12 +37,12 @@ def print_puzzle(file_name, solution):
     for row in range(rows):
         for col in range(columns):
             if((row, col) in tree_locations):
-                print('T', end='')
+                print('T', end=' ')
             elif((row, col) in solution):
-                print('∧', end='')
+                print('∧', end=' ')
             else:    
-                print('.', end='')
-        print(' ',row_tent_counts[row])
+                print('.', end=' ')
+        print('',row_tent_counts[row])
     for i in column_tent_counts:
         print(i, end=' ')
     print('= ' + str(sum(column_tent_counts)))
