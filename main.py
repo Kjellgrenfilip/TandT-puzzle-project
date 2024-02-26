@@ -61,9 +61,7 @@ def main():
     #basic checks to see if the puzzle is even solvable straight away.
     #Check: The amount of tents to be places are the same amount in the rows and columns
     #Check: The amount of tress are the same as the object amount of tents to be placed.
-    if(sum(row_tent_counts) == sum(column_tent_counts) & len(tree_locations) == sum(row_tent_counts)):
-    #    solver = tents_constraints.set_constraints(rows, columns, row_tent_counts, column_tent_counts, tree_locations, tent_variables)
-    
+    if(sum(row_tent_counts) == sum(column_tent_counts) & len(tree_locations) == sum(row_tent_counts)):    
         solver = tents_solver.TentSolver(rows, columns, row_tent_counts, column_tent_counts, tree_locations)
         solver.set_constraints()
         

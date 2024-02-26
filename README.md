@@ -36,7 +36,7 @@ The Solver agent implemented in this project aims to automatically solve Tents a
 - Provides visualization of the solved puzzle grid.
 
 ## Usage
-
+Running on python version 3.9.10
 To use the Solver agent:
 
 1. Clone this repository to your local machine.
